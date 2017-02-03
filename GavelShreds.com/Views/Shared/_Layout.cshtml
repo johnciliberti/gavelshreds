@@ -1,9 +1,9 @@
 ﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>@ViewData["Title"] - GavelShreds.com</title>
 
     <environment names="Development">
@@ -11,7 +11,8 @@
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" crossorigin="anonymous"
+              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
@@ -19,37 +20,51 @@
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse fixed-top" role="navigation">
+
+            <div class="navbar navbar-inverse bg-inverse">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">GavelShreds.com</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="News" class="nav-link">News</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Band" class="nav-link">Band</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Events" class="nav-link">Tour</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Music" class="nav-link">Music</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Video" class="nav-link">Video</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Fans" class="nav-link">Fans</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Store" asp-action="Index" class="nav-link">Store</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
-            </div>
         </div>
     </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2017 - GavelShreds.com</p>
-        </footer>
+    <div class="container-fluid body-content">
+        <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
+                <img src="~/images/logo/logo_white2.png" alt="Gavel" />
+            </div>
+            <div class="col-xl-10 col-lg-9 col-md-8 col-sm-7">
+                @RenderBody()
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <hr />
+                <footer class="fixed-bottom">
+                    <p>&copy; 2017 - Gavelshreds.com</p>
+                </footer>
+            </div>
+        </div>
     </div>
-
+    <script src="~/lib/tether/dist/js/tether.js"></script>
     <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>       
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
@@ -60,11 +75,11 @@
                 crossorigin="anonymous"
                 integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
         </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+                integrity = "sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>

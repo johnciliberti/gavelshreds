@@ -13,7 +13,35 @@ namespace GavelShreds.com.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Band()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Music()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult News()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Events()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Video()
         {
             ViewData["Message"] = "Your application description page.";
 
@@ -24,6 +52,11 @@ namespace GavelShreds.com.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
+            return View();
+        }
+
+        public IActionResult Fans()
+        {
             return View();
         }
 

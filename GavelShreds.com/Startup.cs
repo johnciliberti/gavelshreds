@@ -29,7 +29,7 @@ namespace GavelShreds.com
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
             }
-
+            
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -46,6 +46,7 @@ namespace GavelShreds.com
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
 
             services.AddMvc();
 
@@ -72,8 +73,13 @@ namespace GavelShreds.com
             }
 
             app.UseStaticFiles();
-
             app.UseIdentity();
+            //app.UseFacebookAuthentication(new FacebookOptions()
+            //{
+            //    AppId = Configuration["Authentication:Facebook:AppId"],
+            //    AppSecret = Configuration["Authentication:Facebook:AppSecret"],
+            //    ClientId = "f7ffb9d427782e2a434a770a72c1d9ca"
+            //});
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
