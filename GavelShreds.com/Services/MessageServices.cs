@@ -1,19 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MailKit.Security;
+using Microsoft.Extensions.Options;
 
 namespace GavelShreds.com.Services
 {
-    // This class is used by the application to send Email and SMS
-    // when you turn on two-factor authentication in ASP.NET Identity.
-    // For more details see this link http://go.microsoft.com/fwlink/?LinkID=532713
     public class AuthMessageSender : IEmailSender, ISmsSender
     {
-        public Task SendEmailAsync(string email, string subject, string message)
+        private EmailSenderOptions _Options;
+        public AuthMessageSender(IOptions<EmailSenderOptions> options)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            _Options = options.Value;
+        }
+        public async Task SendEmailAsync(string email, string subject, string message)
+        {
+            var emailMessage = new MimeMessage();
+            emailMessage.From.Add(new MailboxAddress(_Options.FromMailBoxName, _Options.FromMailBoxAddress));
+            emailMessage.To.Add(new MailboxAddress("", email));
+            emailMessage.Subject = subject;
+            emailMessage.Body = new TextPart("plain") { Text = message };
+            using (var client = new SmtpClient())
+            {
+                client.LocalDomain = _Options.LocalDomain;
+                await client.ConnectAsync(_Options.EmailServer, _Options.EmailServerPort, SecureSocketOptions.StartTls).ConfigureAwait(false);
+                await client.AuthenticateAsync(_Options.Authentication.EmailUserName, _Options.Authentication.EmailPassword);
+                await client.SendAsync(emailMessage).ConfigureAwait(false);
+                await client.DisconnectAsync(true).ConfigureAwait(false);
+            }
         }
 
         public Task SendSmsAsync(string number, string message)

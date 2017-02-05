@@ -22,11 +22,11 @@ namespace GavelShreds.com
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("emailSettings.json", optional: false);
 
             if (env.IsDevelopment())
             {
-                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
             }
             
@@ -49,6 +49,9 @@ namespace GavelShreds.com
 
 
             services.AddMvc();
+
+            // add configuration for email sender
+            services.Configure<EmailSenderOptions>(Configuration);
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -74,12 +77,11 @@ namespace GavelShreds.com
 
             app.UseStaticFiles();
             app.UseIdentity();
-            //app.UseFacebookAuthentication(new FacebookOptions()
-            //{
-            //    AppId = Configuration["Authentication:Facebook:AppId"],
-            //    AppSecret = Configuration["Authentication:Facebook:AppSecret"],
-            //    ClientId = "f7ffb9d427782e2a434a770a72c1d9ca"
-            //});
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = Configuration["Authentication:Facebook:AppId"],
+                AppSecret = Configuration["Authentication:Facebook:AppSecret"]
+            });
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 

@@ -1,7 +1,42 @@
-﻿@{
+﻿@model GavelShreds.com.Models.HomeViewModels.ContactModel
+@{
     ViewData["Title"] = "Contact";
 }
 <div class="body-text">
     <h1>Contact Us</h1>
-    Coming Soon!
+    @if (!string.IsNullOrEmpty(Model.ContactErrorMessage))
+    { 
+        <div class="alert alert-danger">
+            <h2>Sorry an unexpected problem prevented the message from being sent</h2>
+            <p>@Model.ContactErrorMessage</p>
+        </div>
+    }
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <form asp-controller="Home" asp-action="Contact" method="post">
+        <div class="form-group">
+            <label asp-for="UserName">Your Name</label>
+            <input class="form-control"  placeholder="Enter your name" asp-for="UserName">
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmailAddress">Email address</label>
+            <input  class="form-control"  aria-describedby="emailHelp" placeholder="Enter email" asp-for="EmailAddress">
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="Message">Message</label>
+            <textarea asp-for="Message" class="form-control"></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
 </div>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

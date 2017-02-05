@@ -1,0 +1,13 @@
+@using System.Collections;
+@{
+    ViewData["Title"] = "Info";
+}
+<div class="body-text">
+
+
+    <h2>Info</h2>
+    @foreach (DictionaryEntry item in Environment.GetEnvironmentVariables())
+    {
+        <strong>@item.Key:</strong> @item.Value<br />
+    }
+</div>
