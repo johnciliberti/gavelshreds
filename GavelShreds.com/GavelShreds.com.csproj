@@ -9,23 +9,6 @@
     <UserSecretsId>aspnet-GavelShreds.com-671f45c7-962d-47e9-a901-680cf7549a47</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="wwwroot\images\Background\Gavel_background.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier1.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier10.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier2.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier3.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier4.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier5.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier6.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier7.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier8.jpg" />
-    <Content Include="wwwroot\images\Fliers\flier9.jpg" />
-    <Content Include="wwwroot\images\Logo\logo_gray.png" />
-    <Content Include="wwwroot\images\Logo\logo_white2.png" />
-    <Content Include="wwwroot\images\Logo\logo_white_sq.png" />
-    <Content Include="wwwroot\images\Logo\OldGavelLogo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="MailKit" Version="1.10.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.0" />
@@ -52,7 +35,6 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\images\Band\" />
     <Folder Include="wwwroot\images\Fans\" />
   </ItemGroup>
 </Project>
