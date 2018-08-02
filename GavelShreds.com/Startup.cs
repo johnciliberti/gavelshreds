@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using GavelShreds.com.Data;
 using GavelShreds.com.Models;
 using GavelShreds.com.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Facebook;
 
 namespace GavelShreds.com
 {
@@ -56,6 +58,13 @@ namespace GavelShreds.com
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+           services.AddAuthentication()
+          .AddFacebook(options =>
+          {
+              options.AppId = Configuration["auth:facebook:appid"];
+              options.AppSecret = Configuration["auth:facebook:appsecret"];
+          });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,12 +85,7 @@ namespace GavelShreds.com
             }
 
             app.UseStaticFiles();
-            app.UseIdentity();
-            app.UseFacebookAuthentication(new FacebookOptions()
-            {
-                AppId = Configuration["Authentication:Facebook:AppId"],
-                AppSecret = Configuration["Authentication:Facebook:AppSecret"]
-            });
+            app.UseAuthentication();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 

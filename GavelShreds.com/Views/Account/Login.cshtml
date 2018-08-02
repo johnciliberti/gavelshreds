@@ -55,7 +55,7 @@
             <section>
                 
                 @{
-                    var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
+                    var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
                     if (loginProviders.Count == 0)
                     {
 
@@ -69,7 +69,7 @@
                                 <p>
                                     @foreach (var provider in loginProviders)
                                     {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.AuthenticationScheme" title="Log in using your @provider.DisplayName account"><i class="fa fa-facebook-official" aria-hidden="true"></i> @provider.AuthenticationScheme</button>
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fa fa-facebook-official" aria-hidden="true"></i> @provider.Name</button>
                                     }
                                 </p>
                             </div>
